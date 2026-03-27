@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Magic Chaos FIX</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: system-ui;
+  background: #111;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* UI */
+.container {
+  text-align: center;
+  transition: opacity 0.5s ease;
+}
+
+input {
+  padding: 15px;
+  width: 280px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+button {
+  padding: 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #10a37f;
+  color: white;
+  cursor: pointer;
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.fullscreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/
+.back {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 10px 14px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 8px;
+  cursor: pointer;
+  display: none;
+}
+</style>
+</head>
+
+<body onclick="focusInput()">
+
+<div class="container" id="ui">
+  <h1>Írj valamit...</h1>
+  <input id="input" placeholder="pl. hello">
+  <button onclick="go()">GO</button>
+</div>
+
+<div class="fullscreen" id="fs">
+  <img src="(m=ldpwiqacxtE_Ai)(mh=hGketDEFqaFb_H3h)42584681b.gif">
+</div>
+
+<div class="back" id="back" onclick="reset()">⬅ vissza</div>
+
+<audio id="sound" src="https://www.myinstants.com/media/sounds/vine-boom.mp3"></audio>
+
+<script>
+const input = document.getElementById("input");
+
+
+input.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    go();
+  }
+});
+
+
+function focusInput() {
+  input.focus();
+}
+
+window.onload = () => input.focus();
+
+function go() {
+  if (!input.value.trim()) return;
+
+  document.getElementById("ui").style.display = "none";
+
+  const fs = document.getElementById("fs");
+  fs.style.display = "block";
+
+  document.getElementById("back").style.display = "block";
+
+  const sound = document.getElementById("sound");
+  sound.currentTime = 0;
+  sound.play();
+}
+
+function reset() {
+  document.getElementById("fs").style.display = "none";
+  document.getElementById("back").style.display = "none";
+  document.getElementById("ui").style.display = "block";
+
+  input.value = "";
+  input.focus();
+}
+</script>
+
+</body>
+</html>
